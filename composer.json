@@ -1,0 +1,19 @@
+{
+  "name": "jibix/map-video",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Jibix\\MapVideo\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Jibix"
+    }
+  ],
+  "require": {
+    "sybio/gif-frame-extractor": "dev-master",
+    "ext-gd": "*",
+    "ext-igbinary": "*"
+  }
+}
