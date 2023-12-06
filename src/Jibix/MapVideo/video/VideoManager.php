@@ -28,6 +28,16 @@ final class VideoManager{
 
     private function __construct(){}
 
+    /**
+     * Function loadVideo
+     * @param int $id
+     * @param string $file
+     * @param Closure|null $onComplete (static function (Video $video): void{})
+     * @param Closure|null $progressNotifier (static function (int $totalFrames, int $loadedFrames): void{})
+     * @param bool $cache
+     * @return void
+     * @throws Exception
+     */
     public function loadVideo(int $id, string $file, ?Closure $onComplete, ?Closure $progressNotifier = null, bool $cache = self::CACHE_VIDEOS): void{
         if ($onComplete !== null) Utils::validateCallableSignature(static function (Video $video): void{}, $onComplete);
         if ($progressNotifier !== null) Utils::validateCallableSignature(static function (int $totalFrames, int $loadedFrames): void{}, $progressNotifier);

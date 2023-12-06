@@ -4,6 +4,7 @@
 ![api](https://img.shields.io/badge/pocketmine-5.0-informational)
 
 A PocketMine-MP library to play videos on maps.
+You can find an example of how to use this library in a plugin [here](https://J1b1x/MapVideoExample).
 
 ![MapVideo](https://github.com/J1b1x/MapVideo/assets/64813399/b2cb44cd-cdcf-4945-b8a8-f6584377d5a6)
 
