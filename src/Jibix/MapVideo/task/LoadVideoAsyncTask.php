@@ -5,6 +5,7 @@ use Jibix\MapVideo\util\CustomMapItemDataPacket;
 use Jibix\MapVideo\util\Utils;
 use Jibix\MapVideo\video\Video;
 use Jibix\MapVideo\video\VideoManager;
+use pmmp\thread\ThreadSafeArray;
 use pocketmine\scheduler\AsyncTask;
 
 
@@ -26,7 +27,7 @@ class LoadVideoAsyncTask extends AsyncTask{
     ){}
 
     public function onRun(): void{
-        $frames = [];
+        $frames = new ThreadSafeArray();
         $totalFrames = count($videoFrames = Utils::videoToFrames($this->file));
         foreach ($videoFrames as $i => $frame) {
             $frames[] = Utils::frameToColors(Utils::frameToImage($frame));
@@ -36,10 +37,11 @@ class LoadVideoAsyncTask extends AsyncTask{
     }
 
     public function onCompletion(): void{
-        ($this->onComplete)($video = new Video(
-            $this->id,
-            array_map(fn (string $colors): CustomMapItemDataPacket => CustomMapItemDataPacket::create($this->id, $colors), $this->getResult())
-        ));
+        $packets = [];
+        foreach ($this->getResult() as $frame) {
+            $packets[] = CustomMapItemDataPacket::create($this->id, $frame);
+        }
+        ($this->onComplete)($video = new Video($this->id, $packets));
         if ($this->cache) VideoManager::getInstance()->cacheVideo($video);
     }
 
