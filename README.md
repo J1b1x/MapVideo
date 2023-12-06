@@ -4,6 +4,7 @@
 ![api](https://img.shields.io/badge/pocketmine-5.0-informational)
 
 A PocketMine-MP library to play videos on maps.
+![Uploading MapVideo.gif…]()
 
 ## Registration
 First you need to register the library. Simply do:
