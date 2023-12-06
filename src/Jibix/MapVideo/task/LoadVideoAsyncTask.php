@@ -30,7 +30,7 @@ class LoadVideoAsyncTask extends AsyncTask{
         $totalFrames = count($videoFrames = Utils::videoToFrames($this->file));
         foreach ($videoFrames as $i => $frame) {
             $frames[] = Utils::frameToColors(Utils::frameToImage($frame));
-            if ($this->progressNotifier !== null) ($this->progressNotifier)($totalFrames, $i +1);
+            if ($this->progressNotifier !== null) $this->publishProgress([$totalFrames, $i +1]);
         }
         $this->setResult($frames);
     }
@@ -41,5 +41,11 @@ class LoadVideoAsyncTask extends AsyncTask{
             array_map(fn (string $colors): CustomMapItemDataPacket => CustomMapItemDataPacket::create($this->id, $colors), $this->getResult())
         ));
         if ($this->cache) VideoManager::getInstance()->cacheVideo($video);
+    }
+
+    public function onProgressUpdate($progress): void{
+        //progressNotifier can't be null at this point
+        [$totalFrames, $loadedFrames] = $progress;
+        ($this->progressNotifier)($totalFrames, $loadedFrames);
     }
 }
