@@ -22,6 +22,10 @@ VideoManager::getInstance()->loadVideo(
     static function (Video $video): void{
         //Do something
     },
+    static function (int $totalFrames, int $loadedFrames): void{
+        $percentage = round($loadedFrames / $total * 100);
+        //Do something (you could send a progress bar for example)
+    }
     true //Set to false if you don't want to cache the video
 );
 ```

@@ -28,14 +28,15 @@ final class VideoManager{
 
     private function __construct(){}
 
-    public function loadVideo(int $id, string $file, ?Closure $onComplete, bool $cache = self::CACHE_VIDEOS): void{
+    public function loadVideo(int $id, string $file, ?Closure $onComplete, ?Closure $progressNotifier = null, bool $cache = self::CACHE_VIDEOS): void{
         if ($onComplete !== null) Utils::validateCallableSignature(static function (Video $video): void{}, $onComplete);
+        if ($progressNotifier !== null) Utils::validateCallableSignature(static function (int $totalFrames, int $loadedFrames): void{}, $progressNotifier);
         if (isset($this->videos[$id])) {
             ($onComplete)($this->videos[$id]);
             return;
         }
         if ($onComplete === null && !$cache) throw new Exception("No result handling provided");
-        Server::getInstance()->getAsyncPool()->submitTask(new LoadVideoAsyncTask($id, $file, $cache, $onComplete));
+        Server::getInstance()->getAsyncPool()->submitTask(new LoadVideoAsyncTask($id, $file, $cache, $onComplete, $progressNotifier));
     }
 
     public function cacheVideo(Video $video): void{

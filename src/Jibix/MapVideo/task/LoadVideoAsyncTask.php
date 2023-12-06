@@ -22,12 +22,15 @@ class LoadVideoAsyncTask extends AsyncTask{
         private string $file,
         private bool $cache,
         private Closure $onComplete,
+        private Closure $progressNotifier,
     ){}
 
     public function onRun(): void{
         $frames = [];
-        foreach (Utils::videoToFrames($this->file) as $frame) {
+        $totalFrames = count($videoFrames = Utils::videoToFrames($this->file));
+        foreach ($videoFrames as $i => $frame) {
             $frames[] = Utils::frameToColors(Utils::frameToImage($frame));
+            if ($this->progressNotifier !== null) ($this->progressNotifier)($totalFrames, $i +1);
         }
         $this->setResult($frames);
     }
