@@ -20,10 +20,10 @@ VideoManager::getInstance()->loadVideo(
     Video::id("my_video_name"),
     "/path/to/video.gif", //Only .gif files are supported at the moment
     static function (Video $video): void{
-        //Do something
+        //Do something (you could play the video for example)
     },
     static function (int $totalFrames, int $loadedFrames): void{
-        $percentage = round($loadedFrames / $total * 100);
+        $percentage = round($loadedFrames / $loadedFrames * 100);
         //Do something (you could send a progress bar for example)
     }
     true //Set to false if you don't want to cache the video

@@ -35,6 +35,7 @@ final class VideoManager{
             ($onComplete)($this->videos[$id]);
             return;
         }
+        if (!is_file($file)) throw new Exception("Video file could not be found");
         if ($onComplete === null && !$cache) throw new Exception("No result handling provided");
         Server::getInstance()->getAsyncPool()->submitTask(new LoadVideoAsyncTask($id, $file, $cache, $onComplete, $progressNotifier));
     }
