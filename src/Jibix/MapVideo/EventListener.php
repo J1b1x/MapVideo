@@ -15,7 +15,7 @@ use pocketmine\player\Player;
  * @date 05.12.2023 - 23:54
  * @project MapVideo
  */
-class EventListener implements Listener{
+final class EventListener implements Listener{
 
     public function onPacketReceive(DataPacketReceiveEvent $event): void{
         $packet = $event->getPacket();

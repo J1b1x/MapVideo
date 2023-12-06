@@ -36,6 +36,7 @@ class VideoPlayTask extends Task{
                 $this->index = 0;
             } else {
                 $this->session->end();
+                $this->getHandler()?->cancel();
             }
             return;
         }

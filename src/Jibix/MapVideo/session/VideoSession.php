@@ -35,6 +35,10 @@ class VideoSession{
         return $this->player;
     }
 
+    public function getVideo(): ?Video{
+        return $this->video;
+    }
+
     public function play(Video $video, VideoPlaySettings $settings): void{
         $this->stop();
         $this->video = $video;
@@ -48,8 +52,9 @@ class VideoSession{
     }
 
     public function stop(): void{
-        $stateId = CustomItemRegistry::FILLED_MAP()->getStateId();
+        //Clearing map images
         $blankMap = CustomItemRegistry::FILLED_MAP()->setMapId(FilledMap::BLANK_MAP_ID);
+        $stateId = $blankMap->getStateId();
         /** @var Inventory $inventory */
         foreach ([$this->player->getInventory(), $this->player->getOffHandInventory()] as $inventory) {
             foreach ($inventory->getContents() as $slot => $item) {
@@ -57,9 +62,5 @@ class VideoSession{
             }
         }
         $this->video = null;
-    }
-
-    public function getVideo(): ?Video{
-        return $this->video;
     }
 }
