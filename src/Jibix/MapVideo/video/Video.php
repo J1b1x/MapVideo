@@ -1,6 +1,6 @@
 <?php
 namespace Jibix\MapVideo\video;
-use Jibix\MapVideo\util\CustomClientboundMapItemPacket;
+use Jibix\MapVideo\util\CustomMapItemDataPacket;
 
 
 /**
@@ -19,7 +19,7 @@ class Video{
     /**
      * Video constructor.
      * @param int $id
-     * @param CustomClientboundMapItemPacket[] $frames
+     * @param CustomMapItemDataPacket[] $frames
      */
     public function __construct(protected int $id, protected array $frames){}
 
@@ -31,7 +31,7 @@ class Video{
         return $this->frames;
     }
 
-    public function getFrame(int $index): ?CustomClientboundMapItemPacket{
+    public function getFrame(int $index): ?CustomMapItemDataPacket{
         return $this->frames[$index] ?? null;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Jibix\MapVideo\task;
 use Closure;
-use Jibix\MapVideo\util\CustomClientboundMapItemPacket;
+use Jibix\MapVideo\util\CustomMapItemDataPacket;
 use Jibix\MapVideo\util\Utils;
 use Jibix\MapVideo\video\Video;
 use Jibix\MapVideo\video\VideoManager;
@@ -35,7 +35,7 @@ class LoadVideoAsyncTask extends AsyncTask{
     public function onCompletion(): void{
         ($this->onComplete)($video = new Video(
             $this->id,
-            array_map(fn (string $colors): CustomClientboundMapItemPacket => CustomClientboundMapItemPacket::create($this->id, $colors), $this->getResult())
+            array_map(fn (string $colors): CustomMapItemDataPacket => CustomMapItemDataPacket::create($this->id, $colors), $this->getResult())
         ));
         if ($this->cache) VideoManager::getInstance()->cacheVideo($video);
     }

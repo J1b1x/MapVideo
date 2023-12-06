@@ -1,7 +1,7 @@
 <?php
 namespace Jibix\MapVideo;
 use Jibix\MapVideo\item\CustomItemRegistry;
-use Jibix\MapVideo\util\CustomClientboundMapItemPacket;
+use Jibix\MapVideo\util\CustomMapItemDataPacket;
 use pocketmine\data\bedrock\item\ItemTypeNames;
 use pocketmine\data\bedrock\item\SavedItemData;
 use pocketmine\item\StringToItemParser;
@@ -26,7 +26,7 @@ final class MapVideo{
     public static function initialize(Plugin $plugin): void{
         if (isset(self::$plugin)) return;
         self::$plugin = $plugin;
-        PacketPool::getInstance()->registerPacket(new CustomClientboundMapItemPacket());
+        PacketPool::getInstance()->registerPacket(new CustomMapItemDataPacket());
         self::registerItems();
         $plugin->getServer()->getPluginManager()->registerEvents(new EventListener(), $plugin);
         $plugin->getServer()->getAsyncPool()->addWorkerStartHook(function (int $worker): void{

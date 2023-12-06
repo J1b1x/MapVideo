@@ -19,7 +19,7 @@ use pocketmine\utils\BinaryStream;
  */
 final class Utils{
 
-    private static CustomClientboundMapItemPacket $blankImage;
+    private static CustomMapItemDataPacket $blankImage;
 
     private function __construct(){}
 
@@ -53,7 +53,7 @@ final class Utils{
         return $serializer->getBuffer();
     }
 
-    public static function getBlankImagePacket(): CustomClientboundMapItemPacket{
+    public static function getBlankImagePacket(): CustomMapItemDataPacket{
         if (!isset(self::$blankImage)) {
             $serializer = new BinaryStream();
             for ($y = 0; $y < 128; ++$y) {
@@ -61,7 +61,7 @@ final class Utils{
                     $serializer->putUnsignedVarInt(Binary::flipIntEndianness(0));
                 }
             }
-            self::$blankImage = CustomClientboundMapItemPacket::create(FilledMap::BLANK_MAP_ID, $serializer->getBuffer());
+            self::$blankImage = CustomMapItemDataPacket::create(FilledMap::BLANK_MAP_ID, $serializer->getBuffer());
         }
         return self::$blankImage;
     }

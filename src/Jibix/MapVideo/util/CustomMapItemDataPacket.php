@@ -15,15 +15,15 @@ use pocketmine\utils\Binary;
 
 
 /**
- * Class CustomClientboundMapItemPacket
+ * Class CustomMapItemDataPacket
  * @package Jibix\MapVideo\util
  * @author Jibix
  * @date 04.12.2023 - 16:47
  * @project MapVideo
  */
-class CustomClientboundMapItemPacket extends DataPacket implements ClientboundPacket{
+class CustomMapItemDataPacket extends DataPacket implements ClientboundPacket{
 
-    //We use a custom packet, so we have no deserialization overhead (caused massive performance issues to serialize/deserialize map image objects, so we do this instead)
+    //We use a custom packet, so we have no deserialization overhead (caused massive performance issues to serialize/deserialize MapImage objects, so we do this instead)
 
     public const NETWORK_ID = ProtocolInfo::CLIENTBOUND_MAP_ITEM_DATA_PACKET;
 
