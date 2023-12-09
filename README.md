@@ -34,7 +34,7 @@ To get a cached video you can do:
 ```php
 VideoManager::getInstance()->getCachedVideo($videoId);
 ```
-You can also get all cached videos by doing
+You can also get all cached videos by doing:
 ```php
 $videos = VideoManager::getInstance()->getCachedVideos();
 ```
