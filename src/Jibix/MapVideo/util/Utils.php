@@ -4,7 +4,6 @@ use GdImage;
 use GifFrameExtractor\GifFrameExtractor;
 use InvalidArgumentException;
 use Jibix\MapVideo\item\FilledMap;
-use pocketmine\color\Color;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\utils\Binary;
 use pocketmine\utils\BinaryStream;
@@ -47,7 +46,7 @@ final class Utils{
                 $color = imagecolorat($image, $x, $y);
                 if ($color === false) throw new AssumptionFailedError("Could not read image pixel at $x:$y");
                 $color |= (0xff << 24);
-                $serializer->putUnsignedVarInt(Binary::flipIntEndianness(Color::fromARGB($color)->toRGBA()));
+                $serializer->putUnsignedVarInt(Binary::flipIntEndianness($color));
             }
         }
         return $serializer->getBuffer();
