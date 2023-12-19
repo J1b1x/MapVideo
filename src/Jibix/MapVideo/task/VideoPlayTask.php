@@ -16,7 +16,7 @@ use pocketmine\scheduler\Task;
  */
 class VideoPlayTask extends Task{
 
-    private int $index = 0;
+    private int $frame = 0;
     private int $videoId;
 
     public function __construct(private VideoSession $session, private VideoPlaySettings $settings){
@@ -30,10 +30,10 @@ class VideoPlayTask extends Task{
             return;
         }
         if ($this->getMapItem()->getNamedTag()->getLong(FilledMap::MAP_ID_TAG, -1) !== $this->videoId) return;
-        $packet = $video->getFrame($this->index++);
+        $packet = $video->getFrame($this->frame++);
         if ($packet === null) {
             if ($this->settings->playOnRepeat()) {
-                $this->index = 0;
+                $this->frame = 0;
             } else {
                 $this->session->end();
                 $this->getHandler()?->cancel();
