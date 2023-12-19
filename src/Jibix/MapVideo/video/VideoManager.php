@@ -1,7 +1,7 @@
 <?php
 namespace Jibix\MapVideo\video;
 use Closure;
-use Exception;
+use LogicException;
 use Jibix\MapVideo\task\LoadVideoAsyncTask;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
@@ -36,7 +36,7 @@ final class VideoManager{
      * @param Closure|null $progressNotifier (static function (int $totalFrames, int $loadedFrames): void{})
      * @param bool $cache
      * @return void
-     * @throws Exception
+     * @throws LogicException
      */
     public function loadVideo(int $id, string $file, ?Closure $onComplete, ?Closure $progressNotifier = null, bool $cache = self::CACHE_VIDEOS): void{
         if ($onComplete !== null) Utils::validateCallableSignature(static function (Video $video): void{}, $onComplete);
@@ -46,7 +46,7 @@ final class VideoManager{
             return;
         }
         if (!is_file($file)) throw new Exception("Video file could not be found");
-        if ($onComplete === null && !$cache) throw new Exception("No result handling provided");
+        if ($onComplete === null && !$cache) throw new LogicException("No result handling provided");
         Server::getInstance()->getAsyncPool()->submitTask(new LoadVideoAsyncTask($id, $file, $cache, $onComplete, $progressNotifier));
     }
 
