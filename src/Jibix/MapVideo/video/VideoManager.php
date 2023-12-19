@@ -2,6 +2,7 @@
 namespace Jibix\MapVideo\video;
 use Closure;
 use LogicException;
+use InvalidArgumentException;
 use Jibix\MapVideo\task\LoadVideoAsyncTask;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
@@ -45,7 +46,7 @@ final class VideoManager{
             ($onComplete)($this->videos[$id]);
             return;
         }
-        if (!is_file($file)) throw new Exception("Video file could not be found");
+        if (!is_file($file)) throw new InvalidArgumentException("Video file could not be found");
         if ($onComplete === null && !$cache) throw new LogicException("No result handling provided");
         Server::getInstance()->getAsyncPool()->submitTask(new LoadVideoAsyncTask($id, $file, $cache, $onComplete, $progressNotifier));
     }
