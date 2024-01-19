@@ -23,6 +23,8 @@ final class MapVideo{
 
     private static Plugin $plugin;
 
+    private function __construct(){}
+
     public static function initialize(Plugin $plugin): void{
         if (isset(self::$plugin)) return;
         self::$plugin = $plugin;
