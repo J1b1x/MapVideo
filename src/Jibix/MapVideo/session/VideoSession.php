@@ -18,7 +18,7 @@ use WeakMap;
  * @date 05.12.2023 - 23:04
  * @project MapVideo
  */
-class VideoSession{
+final class VideoSession{
 
     private static WeakMap $sessions;
 
@@ -52,7 +52,7 @@ class VideoSession{
     }
 
     public function stop(): void{
-        //Clearing map images
+        //Cleaning map images
         $blankMap = CustomItemRegistry::FILLED_MAP()->setMapId(FilledMap::BLANK_MAP_ID);
         $stateId = $blankMap->getStateId();
         /** @var Inventory $inventory */
