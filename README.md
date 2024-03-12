@@ -15,7 +15,7 @@ First you need to register the library. Simply do:
 ```
 
 ## Video loading
-To load a video, all you need to do is:
+Load a video:
 ```php
 VideoManager::getInstance()->loadVideo(
     Video::id("my_video_name"),
@@ -30,17 +30,17 @@ VideoManager::getInstance()->loadVideo(
     true //Set to false if you don't want to cache the video
 );
 ```
-To get a cached video you can do:
+Get a cached video:
 ```php
 VideoManager::getInstance()->getCachedVideo($videoId);
 ```
-You can also get all cached videos by doing:
+Get all cached videos:
 ```php
 $videos = VideoManager::getInstance()->getCachedVideos();
 ```
 
 ## Video playing
-To play a video, all you need to do is:
+Play a video:
 ```php
 $videoSettings = new VideoPlaySettings(
     repeat: true, //Automatically restarts when the video ends
@@ -49,11 +49,11 @@ $videoSettings = new VideoPlaySettings(
 );
 VideoSession::get($player)->play($video, $videoSettings);
 ```
-If you want to stop a video you can just do:
+Stop a video:
 ```php
 VideoSession::get($player)->stop();
 ```
-You can also get the current video by doing this:
+Get the currently playing video:
 ```php
 $video = VideoSession::get($player)->getVideo();
 ```
