@@ -20,7 +20,7 @@ final class EventListener implements Listener{
     public function onPacketReceive(DataPacketReceiveEvent $event): void{
         $packet = $event->getPacket();
         if (!$packet instanceof MapInfoRequestPacket) return;
-        $player = $event->getOrigin()->getPlayer();
-        if ($player instanceof Player && $packet->mapId == FilledMap::BLANK_MAP_ID) $player->getNetworkSession()->sendDataPacket(Utils::getBlankImagePacket());
+        $origin = $event->getOrigin();
+        if ($origin->getPlayer() !== null && $packet->mapId == FilledMap::BLANK_MAP_ID) $origin->sendDataPacket(Utils::getBlankImagePacket());
     }
 }
