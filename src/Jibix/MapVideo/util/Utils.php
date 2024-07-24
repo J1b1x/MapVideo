@@ -4,6 +4,7 @@ use GdImage;
 use GifFrameExtractor\GifFrameExtractor;
 use InvalidArgumentException;
 use Jibix\MapVideo\item\FilledMap;
+use pocketmine\color\Color;
 use pocketmine\utils\AssumptionFailedError;
 use pocketmine\utils\Binary;
 use pocketmine\utils\BinaryStream;
