@@ -46,7 +46,7 @@ final class Utils{
                 $color = imagecolorat($image, $x, $y);
                 if ($color === false) throw new AssumptionFailedError("Could not read image pixel at $x:$y");
                 $color |= (0xff << 24);
-                $serializer->putUnsignedVarInt(Binary::flipIntEndianness($color));
+                $serializer->putUnsignedVarInt(Binary::flipIntEndianness(Color::fromARGB($color)->toRGBA()));
             }
         }
         return $serializer->getBuffer();
